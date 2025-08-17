@@ -1,0 +1,7 @@
+A = 0
+FOR I IN RANGE(100000000):
+    A+=I
+
+PRINT(A)
+
+FOR 

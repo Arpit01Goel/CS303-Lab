@@ -1,0 +1,2 @@
+arpit    seat0        2025-08-11 12:34 (login screen)
+arpit    tty2         2025-08-11 12:34 (tty2)

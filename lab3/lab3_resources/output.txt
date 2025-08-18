@@ -1,0 +1,8 @@
+This line is from pid 10214, value = 1
+This line is from pid 10214, value = 2
+This line is from pid 10215, value = 1
+This line is from pid 10214, value = 1
+This line is from pid 10214, value = 2
+This line is from pid 10215, value = 2
+This line is from pid 10215, value = 1
+This line is from pid 10215, value = 2

@@ -2,6 +2,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+// unistd provides unix like system apis like read, write, close, fork, exec functions
 
 void printOneFile(char * filename) {
     int fd = open(filename, O_RDONLY);

@@ -8,7 +8,6 @@
 
 int main()
 {
-    int temp = 1;
     while (1)
     {
         char opr1[50], opr2[50]; // store numbers as strings

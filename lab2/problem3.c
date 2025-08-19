@@ -1,37 +1,41 @@
-#include <stdio.h>
-#include <dirent.h>
-#include <sys/stat.h>
-#include <unistd.h>
+#include <dirent.h>   
+#include <unistd.h>   
+#include <sys/stat.h> 
 #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 
+void delete_dir(const char *path) {
+    DIR *d = opendir(path);
+    struct dirent *entry;
+    char fullpath[1024];
 
-int delete_dir(const char * path) {
-    struct dirent* entry;
-    DIR *dp = opendir(path);
-    if (dp==NULL) {
-        perror("opendir");
-        return -1;
+    if (!d) return;
+
+    while ((entry = readdir(d)) != NULL) {
+        if (!strcmp(entry->d_name, ".") || !strcmp(entry->d_name, "..")) continue;
+
+        snprintf(fullpath, sizeof(fullpath), "%s/%s", path, entry->d_name);
+
+        struct stat st;
+        stat(fullpath, &st);
+
+        if (S_ISDIR(st.st_mode)) {
+            delete_dir(fullpath); 
+        } else {
+            unlink(fullpath); 
+        }
     }
-    while ((entry = readdir(dp))!=NULL) {
-        if (strcmp(entry->d_name, ".")==0 || strcmp(entry->d_name, "..")==0) continue;
-        char full_path[4096];
-        snprintf(full_path, sizeof(full_path), "%s/%s", path, entry->d_name );
 
-        struct stat stat
-    }
+    closedir(d);
+    rmdir(path); 
 }
 
-
-int main(int argc, char* argv[], char* envp[]) {
-    if (argc<2) {
-        printf("invalid number of arguments \n");
+int main(int argc, char *argv[]) {
+    if (argc < 2) {
+        perror("rmdir");
         return 1;
     }
-    if (delete_dir(argv[1])==0) {
-        printf("Director '%s' deleted successfully. \n");
-        
-    }else {
-        fprintf(stderr, "Failed to delete directory \n");
-    }
+    delete_dir(argv[1]);
     return 0;
 }

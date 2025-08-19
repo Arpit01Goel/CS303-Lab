@@ -17,12 +17,12 @@ int main(int argc, char *argv[]) {
     }
 
     if (pid == 0) {
-        // Child: launch xterm and run sort1
+        
         execlp("xterm", "xterm", "-hold", "-e", "./sort1", argv[1], (char*)NULL);
-        perror("execlp failed"); // Only runs if execlp fails
+        
         exit(1);
     } else {
-        // Parent: wait for child
+        
         int status;
         waitpid(pid, &status, 0);
     }
